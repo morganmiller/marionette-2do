@@ -1,17 +1,11 @@
 requirejs.config({
   paths: {
-    'jquery'             :
-      '../lib/jquery/dist/jquery',
-    'underscore'         :
-      '../lib/underscore/underscore',
-    'backbone'           :
-      '../lib/backbone/backbone',
-    'backbone.babysitter':
-      '../lib/backbone.babysitter/lib/backbone.babysitter',
-    'backbone.wreqr'     :
-      '../lib/backbone.wreqr/lib/backbone.wreqr',
-    'backbone.marionette':
-      '../lib/marionette/lib/core/backbone.marionette'
+    'jquery'             : '../lib/jquery/dist/jquery',
+    'underscore'         : '../lib/underscore/underscore',
+    'backbone'           : '../lib/backbone/backbone',
+    'backbone.babysitter': '../lib/backbone.babysitter/lib/backbone.babysitter',
+    'backbone.wreqr'     : '../lib/backbone.wreqr/lib/backbone.wreqr',
+    'backbone.marionette': '../lib/marionette/lib/core/backbone.marionette'
   },
   shim: {
     underscore: {
@@ -34,21 +28,6 @@ requirejs.config({
 } );
 
 //test it works
-require([
-  'jquery',
-  'backbone',
-  'backbone.marionette'
-], function(
-  $,
-  Backbone,
-  Marionette
-) {
-
-  $( document ).ready( function() {
-    console.log( 'Document is ready.' );
-    console.log( 'jQuery: ', $ );
-    console.log( 'Backbone: ', Backbone );
-    console.log( 'Marionette: ', Marionette );
-  } );
-
-} );
+require(['app'], function(App){
+  App.start();
+});
