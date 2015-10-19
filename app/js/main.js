@@ -7,6 +7,7 @@ requirejs.config({
     'backbone.wreqr'     : '../lib/backbone.wreqr/lib/backbone.wreqr',
     'backbone.marionette': '../lib/marionette/lib/core/backbone.marionette'
   },
+
   shim: {
     underscore: {
       exports: '_'

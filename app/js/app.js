@@ -6,7 +6,22 @@ define(['backbone.marionette'], function(Marionette){
   });
 
   App.on('start', function(){
+    //require([
+    //  "models/task",
+    //  "collections/tasks",
+    //  "views/app-view",
+    //  "views/task",
+    //  "views/task-list",
+    //  "views/form",
+    //  "controllers/tasks",
+    //  "controllers/form"
+    //], function(){
+    //  Backbone.history.start();
+    //});
+
     Backbone.history.start();
+
+
     App.appView = new App.Views.AppView();
     console.log(App.appView);
     App.appView.render();
@@ -50,7 +65,6 @@ define(['backbone.marionette'], function(Marionette){
     Views.Task = Marionette.ItemView.extend({
       tagName: "li",
       className: 'list-item',
-//come back and use require or underscore for templates
       template: "#task-list-item",
 
       events: {
@@ -72,7 +86,6 @@ define(['backbone.marionette'], function(Marionette){
 
     Views.TaskList = Marionette.CompositeView.extend({
       className: "task-list",
-//come back and use require or underscore for templates
       template: "#task-list",
       childView: Views.Task,
       childViewContainer: "ul"
@@ -129,6 +142,9 @@ define(['backbone.marionette'], function(Marionette){
       }
     };
   });
+
+  //for debugging
+  window.App = App;
 
   return App
 });
