@@ -1,11 +1,12 @@
 requirejs.config({
   paths: {
-    'jquery'             : '../lib/jquery/dist/jquery',
-    'underscore'         : '../lib/underscore/underscore',
-    'backbone'           : '../lib/backbone/backbone',
-    'backbone.babysitter': '../lib/backbone.babysitter/lib/backbone.babysitter',
-    'backbone.wreqr'     : '../lib/backbone.wreqr/lib/backbone.wreqr',
-    'backbone.marionette': '../lib/marionette/lib/core/backbone.marionette'
+    'jquery'               : '../lib/jquery/dist/jquery',
+    'underscore'           : '../lib/underscore/underscore',
+    'backbone'             : '../lib/backbone/backbone',
+    'backbone.babysitter'  : '../lib/backbone.babysitter/lib/backbone.babysitter',
+    'backbone.wreqr'       : '../lib/backbone.wreqr/lib/backbone.wreqr',
+    'backbone.marionette'  : '../lib/marionette/lib/core/backbone.marionette',
+    'backbone.localstorage': '../lib/Backbone.localStorage/backbone.localStorage'
   },
 
   shim: {

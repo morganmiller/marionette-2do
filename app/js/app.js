@@ -1,4 +1,4 @@
-define(['backbone.marionette'], function(Marionette){
+define(['backbone.marionette', 'backbone.localstorage'], function(Marionette){
   var App = new Marionette.Application({
     initialize: function(options){
       console.log("You started your app!")
@@ -46,7 +46,8 @@ define(['backbone.marionette'], function(Marionette){
 //COLLECTIONS
   App.module("Collections", function(Collections, App, Backbone, Marionette, _, $){
     Collections.Tasks = Backbone.Collection.extend({
-      model: App.Models.Task
+      model: App.Models.Task,
+      localStorage: new Backbone.LocalStorage("TasksCollection")
     })
   });
 
@@ -73,7 +74,7 @@ define(['backbone.marionette'], function(Marionette){
 
       completeTask: function(e){
         e.preventDefault();
-        this.remove();
+        this.model.destroy();
       },
 
       remove: function(){
@@ -81,6 +82,7 @@ define(['backbone.marionette'], function(Marionette){
         this.$el.slideUp(function(){
           Marionette.ItemView.prototype.remove.call(task)
         });
+        //task.model.destroy();
       }
     });
 
@@ -101,6 +103,11 @@ define(['backbone.marionette'], function(Marionette){
         "keypress #new-task": "receiveInput"
       },
 
+      initialize: function() {
+        var taskCollection = App.appView.getChildView('tasks').collection;
+        this.on("create:todo", taskCollection.create, taskCollection);
+      },
+
       receiveInput: function(e){
         var ENTER_KEY = 13;
         var newTaskTitle = this.ui.input.val().trim();
@@ -111,7 +118,7 @@ define(['backbone.marionette'], function(Marionette){
       },
 
       createNewTask: function(newTask){
-        App.appView.getChildView('tasks').collection.add(newTask);
+        this.trigger("create:todo", newTask);
         this.ui.input.val("")
       }
     })
@@ -122,11 +129,8 @@ define(['backbone.marionette'], function(Marionette){
   App.module("Controllers", function(Controllers, App, Backbone, Marionette, _, $){
     Controllers.TasksController = {
       showTasks: function(){
-        var tasks = new App.Collections.Tasks([
-          {title: "Learn Marionette!"},
-          {title: "Make a task app"},
-          {title: "Remember to eat"}
-        ]);
+        var tasks = new App.Collections.Tasks();
+        tasks.fetch();
 
         var tasksList = new App.Views.TaskList({
           collection: tasks
@@ -143,7 +147,7 @@ define(['backbone.marionette'], function(Marionette){
     };
   });
 
-  //for debugging
+  //for console debugging
   window.App = App;
 
   return App
