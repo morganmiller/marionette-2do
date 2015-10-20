@@ -6,33 +6,18 @@ define(['backbone.marionette', 'backbone.localstorage'], function(Marionette){
   });
 
   App.on('start', function(){
-    //require([
-    //  "models/task",
-    //  "collections/tasks",
-    //  "views/app-view",
-    //  "views/task",
-    //  "views/task-list",
-    //  "views/form",
-    //  "controllers/tasks",
-    //  "controllers/form"
-    //], function(){
-    //  Backbone.history.start();
-    //});
-
     Backbone.history.start();
 
 
     App.appView = new App.Views.AppView();
-    console.log(App.appView);
     App.appView.render();
 
-    var newTasks = App.Controllers.TasksController.showTasks();
-    App.appView.showChildView('tasks', newTasks);
+    var allTasks = App.Controllers.TasksController.showTasks();
+    App.appView.showChildView('tasks', allTasks);
 
     var form = App.Controllers.FormController.showForm();
     App.appView.showChildView('form', form)
   });
-
 
 
 //MODELS
@@ -50,6 +35,7 @@ define(['backbone.marionette', 'backbone.localstorage'], function(Marionette){
       localStorage: new Backbone.LocalStorage("TasksCollection")
     })
   });
+
 
 //VIEWS
   App.module("Views", function(Views, App, Backbone, Marionette, _, $){
@@ -82,7 +68,6 @@ define(['backbone.marionette', 'backbone.localstorage'], function(Marionette){
         this.$el.slideUp(function(){
           Marionette.ItemView.prototype.remove.call(task)
         });
-        //task.model.destroy();
       }
     });
 
@@ -105,7 +90,7 @@ define(['backbone.marionette', 'backbone.localstorage'], function(Marionette){
 
       initialize: function() {
         var taskCollection = App.appView.getChildView('tasks').collection;
-        this.on("create:todo", taskCollection.create, taskCollection);
+        this.on("create:task", taskCollection.create, taskCollection);
       },
 
       receiveInput: function(e){
@@ -118,7 +103,7 @@ define(['backbone.marionette', 'backbone.localstorage'], function(Marionette){
       },
 
       createNewTask: function(newTask){
-        this.trigger("create:todo", newTask);
+        this.trigger("create:task", newTask);
         this.ui.input.val("")
       }
     })
@@ -149,6 +134,5 @@ define(['backbone.marionette', 'backbone.localstorage'], function(Marionette){
 
   //for console debugging
   window.App = App;
-
   return App
 });
