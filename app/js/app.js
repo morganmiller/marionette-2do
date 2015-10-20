@@ -1,9 +1,5 @@
 define(['backbone.marionette', 'backbone.localstorage'], function(Marionette){
-  var App = new Marionette.Application({
-    initialize: function(options){
-      console.log("You started your app!")
-    }
-  });
+  var App = new Marionette.Application();
 
   App.on('start', function(){
     Backbone.history.start();
