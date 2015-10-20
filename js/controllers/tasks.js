@@ -1,21 +1,15 @@
-define(["../app", "../collections/tasks", "../views/task-list"], function(App, TasksCollection, TaskListView) {
-  App.module("Controllers", function(Controllers, App, Backbone, Marionette, _, $) {
-    Controllers.TasksController = {
-      showTasks: function() {
-        var tasks = new TasksCollection([
-          {title: "Learn Marionette!"},
-          {title: "Make a task app"},
-          {title: "Remember to eat"}
-        ]);
+define(["../app", "../collections/tasks", "../views/task-list", "backbone.localstorage"], function(App, TasksCollection, TaskListView) {
+  var tasksController = {
+    showTasks: function(){
+      var tasks = new TasksCollection;
+      tasks.fetch();
 
-        var tasksList = new TaskListView({
-          collection: tasks
-        });
+      var tasksList = new TaskListView({
+        collection: tasks
+      });
 
-        return tasksList;
-      }
-    };
-
-    return Controllers.TasksController
-  });
+      return tasksList;
+    }
+  };
+  return tasksController
 });
