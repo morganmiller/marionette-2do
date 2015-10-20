@@ -1,15 +1,13 @@
 define(['backbone.marionette',
         'views/app-view',
         'controllers/tasks',
-        'controllers/form',
-        'backbone.localstorage'],
+        'controllers/form'],
         function(Marionette, AppView, TasksController, FormController){
 
   var App = new Marionette.Application();
 
   App.on('start', function(){
     Backbone.history.start();
-
 
     App.appView = new AppView();
     App.appView.render();

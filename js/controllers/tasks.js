@@ -1,4 +1,4 @@
-define(["../app", "../collections/tasks", "../views/task-list", "backbone.localstorage"], function(App, TasksCollection, TaskListView) {
+define(["../app", "../collections/tasks", "../views/task-list"], function(App, TasksCollection, TaskListView) {
   var tasksController = {
     showTasks: function(){
       var tasks = new TasksCollection;
