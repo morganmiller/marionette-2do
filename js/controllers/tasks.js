@@ -1,4 +1,4 @@
-define(["app", "../collections/tasks", "../views/task-list"], function(App, TasksCollection, TaskListView) {
+define(["../app", "../collections/tasks", "../views/task-list"], function(App, TasksCollection, TaskListView) {
   App.module("Controllers", function(Controllers, App, Backbone, Marionette, _, $) {
     Controllers.TasksController = {
       showTasks: function() {

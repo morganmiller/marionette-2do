@@ -1,4 +1,4 @@
-define(["app"], function(App) {
+define(["../app"], function(App) {
   App.module("Views", function(Views, App, Backbone, Marionette, _, $){
     Views.AppView = Marionette.LayoutView.extend({
       template: "#app",

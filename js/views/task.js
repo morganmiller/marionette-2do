@@ -1,4 +1,4 @@
-define(["app"], function(App) {
+define(["../app"], function(App) {
   App.module("Views", function(Views, App, Backbone, Marionette, _, $){
     Views.Task = Marionette.ItemView.extend({
       tagName: "li",
